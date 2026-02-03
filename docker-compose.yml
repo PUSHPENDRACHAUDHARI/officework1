@@ -4,7 +4,7 @@ services:
     build:
       context: ./management
     ports:
-      - "8080:8080"
+      - "8081:8080"   # HOST:CONTAINER
     restart: always
 
   frontend:
@@ -12,7 +12,7 @@ services:
     build:
       context: ./salesmanagement
     ports:
-      - "8001:80"
+      - "80:80"
     depends_on:
       - backend
     restart: always
