@@ -15,10 +15,14 @@ pipeline {
         }
 
         stage('Stop Old Containers') {
-            steps {
-                sh 'docker-compose down || true'
-            }
-        }
+    steps {
+        sh '''
+        docker-compose down || true
+        docker rm -f management-mysql || true
+        '''
+    }
+}
+
 
         stage('Build Docker Images') {
             steps {
