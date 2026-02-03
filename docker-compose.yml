@@ -1,14 +1,20 @@
+version: "3.9"
+
 services:
   backend:
-    build: ./management
     container_name: management-backend
+    build:
+      context: ./management
     ports:
-      - "8080:8080"
+      - "3000:3000"
     restart: always
+    env_file:
+      - ./management/.env
 
   frontend:
-    build: ./salesmanagement
     container_name: salesmanagement-frontend
+    build:
+      context: ./salesmanagement
     ports:
       - "8001:80"
     depends_on:

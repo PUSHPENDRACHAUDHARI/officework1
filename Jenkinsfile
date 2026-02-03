@@ -1,8 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+        COMPOSE_FILE = "docker-compose.yml"
+    }
+
     stages {
-        stage('Checkout Code') {
+
+        stage('Clone Repository') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/PUSHPENDRACHAUDHARI/officework1.git'
@@ -15,25 +20,25 @@ pipeline {
             }
         }
 
-        stage('Build & Deploy') {
+        stage('Build Docker Images') {
             steps {
-                sh 'docker-compose up -d --build'
+                sh 'docker-compose build'
             }
         }
 
-        stage('Verify') {
+        stage('Deploy Application') {
             steps {
-                sh 'docker ps'
+                sh 'docker-compose up -d'
             }
         }
     }
 
     post {
         success {
-            echo "✅ Deployment Successful"
+            echo "✅ Deployment Successful!"
         }
         failure {
-            echo "❌ Deployment Failed"
+            echo "❌ Deployment Failed!"
         }
     }
 }
