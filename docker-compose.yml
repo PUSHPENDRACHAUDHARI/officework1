@@ -1,10 +1,28 @@
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: management-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: managementdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
   backend:
     container_name: management-backend
     build:
       context: ./management
     ports:
-      - "8081:8080"     # HOST:CONTAINER
+      - "8081:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/managementdb?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
     restart: always
 
   frontend:
@@ -12,8 +30,11 @@ services:
     build:
       context: ./salesmanagement
     ports:
-      - "8082:80"       # HOST:CONTAINER
+      - "8082:80"
     depends_on:
       - backend
     restart: always
+
+volumes:
+  mysql-data:
 

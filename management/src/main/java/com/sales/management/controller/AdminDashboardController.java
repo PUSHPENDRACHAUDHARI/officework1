@@ -18,7 +18,7 @@ import com.sales.management.Repository.ProjectRepository;
 import com.sales.management.dto.ApiResponse;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://http://13.203.24.103:8081/")
 @RequestMapping("/admindashboard")
 public class AdminDashboardController {
 

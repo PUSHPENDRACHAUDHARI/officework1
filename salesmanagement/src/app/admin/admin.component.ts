@@ -151,7 +151,8 @@ resetTaskFilters() {
     role: 'USER'
   };
 
-  private baseUrl = 'http://localhost:8080';
+  baseUrl: string = 'http://13.203.24.103:8081';
+
 
   // 🔹 Chart instances
   leadsChart: Chart<'doughnut', number[], string> | null = null;

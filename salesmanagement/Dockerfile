@@ -1,4 +1,4 @@
-# ---------- Build Stage ----------
+# ---------- Build stage ----------
 FROM node:18-alpine AS build
 WORKDIR /app
 
@@ -8,14 +8,22 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# ---------- Runtime Stage ----------
+# ---------- Runtime stage ----------
 FROM nginx:alpine
 
-# REMOVE default nginx files
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy custom nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Clean default html
 RUN rm -rf /usr/share/nginx/html/*
 
-# COPY correct Angular build output
-COPY --from=build /app/dist/salesmanagement /usr/share/nginx/html
+# ✅ IMPORTANT: copy from /browser
+COPY --from=build /app/dist/salesmanagement/browser /usr/share/nginx/html
+
+RUN chmod -R 755 /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

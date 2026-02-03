@@ -17,7 +17,7 @@ export class LoginComponent {
   message = '';
   isError = false;
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://13.203.24.103:8081';
 
   constructor(private http: HttpClient, private router: Router) {}
 

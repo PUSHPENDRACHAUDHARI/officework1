@@ -12,7 +12,7 @@ import com.sales.management.dto.ApiResponse;
 import com.sales.management.dto.UserDailyReportDto;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://http://13.203.24.103:8081/")
 @RequestMapping("/user/report")
 public class UserReportController {
 

@@ -165,7 +165,7 @@ resetUserTaskFilter() {
 
   leadForm: any = {};
 
-  private baseUrl = 'http://localhost:8080';
+  baseUrl: string = 'http://13.203.24.103:8081';
 
   constructor(
     private http: HttpClient,
