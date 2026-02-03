@@ -1,13 +1,21 @@
-FROM node:18-alpine
+# -------- Build stage --------
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --production
+COPY pom.xml .
+COPY src ./src
 
-COPY . .
+RUN mvn clean package -DskipTests
 
-EXPOSE 3000
+# -------- Run stage --------
+FROM eclipse-temurin:17-jre
 
-CMD ["node", "server.js"]
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
