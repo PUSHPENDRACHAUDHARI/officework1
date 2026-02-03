@@ -1,20 +1,16 @@
-version: "3.8"
-
 services:
   backend:
     build: ./management
     container_name: management-backend
     ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
+      - "8080:8080"
     restart: always
 
   frontend:
     build: ./salesmanagement
     container_name: salesmanagement-frontend
     ports:
-      - "80:80"
+      - "8001:80"
     depends_on:
       - backend
     restart: always
