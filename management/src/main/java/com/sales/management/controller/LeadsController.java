@@ -13,7 +13,7 @@ import com.sales.management.entity.LeadsEntity;
 import com.sales.management.entity.TaskEntity;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://13.203.24.103:8082")
 public class LeadsController {
 
     @Autowired
