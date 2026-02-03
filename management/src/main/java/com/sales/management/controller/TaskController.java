@@ -10,7 +10,7 @@ import com.sales.management.dto.ApiResponse;
 import com.sales.management.entity.TaskEntity;
 
 @RestController
-@CrossOrigin(origins = "http://http://13.203.24.103:8081/")
+@CrossOrigin(origins = "http://13.203.24.103:8081/")
 @RequestMapping("/tasks")
 public class TaskController {
 
